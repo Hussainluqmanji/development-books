@@ -31,14 +31,18 @@ public class DevelopmentBooksService {
 		for (int i = 0; i < noOfGroups; i++) {
 			int typesOfBookLeft = (int) booksBought.stream().filter(book -> book.getQuantity() > 0).count();
 				bookGroups.add(typesOfBookLeft);
-				booksBought.forEach(book -> {
-					book.setQuantity(book.getQuantity() - 1);
-				});
+				reduceQuantityOfAlreadyBookIntoGroups(booksBought);
 			} 
 	
 
 	    finalPrice = bookGroups.stream().mapToDouble(group -> calculatePriceForBooksWithDiscount(group)).sum();
 		return finalPrice;
+	}
+	
+	public void reduceQuantityOfAlreadyBookIntoGroups(List<BooksInput> books) {
+		books.forEach(book -> {
+			book.setQuantity(book.getQuantity() - 1);
+		});
 	}
 	
 	public double calculatePriceForBooksWithDiscount(int differentBooks) {
