@@ -40,14 +40,8 @@ public class DevelopmentBooksService {
 			}
 			} 
 	
-		PriceSummary priceSummary = new PriceSummary();
-		priceSummary.setActualPrice(50 * totalBooks);
-		priceSummary.setFinalPrice(priceOfSimilarBooksLeft
-				+ bookGroups.stream().mapToDouble(group -> calculatePriceForBooksWithDiscount(group)).sum());
-		priceSummary.setTotalBooks(totalBooks);
-		priceSummary.setTotalDiscount(priceSummary.getActualPrice() - priceSummary.getFinalPrice());
+		return createPriceSummaryForMultipleBookGroups(bookGroups, totalBooks, priceOfSimilarBooksLeft);
 
-		return priceSummary;
 	}
 	
 	public void reduceQuantityOfAlreadyBookIntoGroups(List<BooksInput> books) {
