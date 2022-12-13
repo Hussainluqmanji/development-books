@@ -27,15 +27,21 @@ public class DevelopmentBooksService {
 		int totalBooks = booksBought.stream().mapToInt(book -> book.getQuantity()).sum();
 		int noOfGroups = 1 + (totalBooks / booksBought.size());
         double finalPrice = 0;
+        double priceOfSimilarBooksLeft = 0;
         
 		for (int i = 0; i < noOfGroups; i++) {
 			int typesOfBookLeft = (int) booksBought.stream().filter(book -> book.getQuantity() > 0).count();
+			if (typesOfBookLeft > 1) {
 				bookGroups.add(typesOfBookLeft);
 				reduceQuantityOfAlreadyBookIntoGroups(booksBought);
+			} else {
+				priceOfSimilarBooksLeft = booksBought.stream().filter(book -> book.getQuantity() > 0).mapToDouble(book -> book.getQuantity() * SINGLE_BOOK_PRICE).sum();
+				break;
+			}
 			} 
 	
 
-	    finalPrice = bookGroups.stream().mapToDouble(group -> calculatePriceForBooksWithDiscount(group)).sum();
+	    finalPrice = priceOfSimilarBooksLeft + bookGroups.stream().mapToDouble(group -> calculatePriceForBooksWithDiscount(group)).sum();
 		return finalPrice;
 	}
 	
