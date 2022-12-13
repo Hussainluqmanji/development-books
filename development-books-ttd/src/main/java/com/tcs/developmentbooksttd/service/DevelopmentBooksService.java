@@ -35,7 +35,7 @@ public class DevelopmentBooksService {
 				bookGroups.add(typesOfBookLeft);
 				reduceQuantityOfAlreadyBookIntoGroups(booksBought);
 			} else {
-				priceOfSimilarBooksLeft = booksBought.stream().filter(book -> book.getQuantity() > 0).mapToDouble(book -> book.getQuantity() * SINGLE_BOOK_PRICE).sum();
+				priceOfSimilarBooksLeft = calculatePriceForBooksWithoutDiscount(booksBought);
 				break;
 			}
 			} 
@@ -49,6 +49,10 @@ public class DevelopmentBooksService {
 		books.forEach(book -> {
 			book.setQuantity(book.getQuantity() - 1);
 		});
+	}
+	
+	public double calculatePriceForBooksWithoutDiscount(List<BooksInput> books) {
+		return books.stream().filter(book -> book.getQuantity() > 0).mapToDouble(book -> book.getQuantity() * SINGLE_BOOK_PRICE).sum();
 	}
 	
 	public double calculatePriceForBooksWithDiscount(int differentBooks) {
