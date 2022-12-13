@@ -38,6 +38,11 @@ public class DevelopmentBooksService {
 			discount = 10;
 		}
 		
+		else if(totalBooks == 4 && typesOfBook == 4)
+		{
+			discount = 20;
+		}
+		
 		double finalPrice = actualCost - (actualCost * (discount / 100));
 		return finalPrice;
 	}
