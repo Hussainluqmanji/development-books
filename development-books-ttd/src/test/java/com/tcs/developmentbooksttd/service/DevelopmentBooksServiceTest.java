@@ -118,4 +118,13 @@ public class DevelopmentBooksServiceTest {
 		assertEquals(875.0, result.getFinalPrice(), 0.0);
 
 	}
+	
+	@Test
+	public void userOnlyBoughtSimilatBooks() {
+		List<BooksInput> books = new ArrayList<BooksInput>();
+		books.add(new BooksInput(1, 10));
+		PriceSummary result = service.calculateBooksCostWithDiscount(books);
+		assertEquals(500.0, result.getFinalPrice(), 0.0);
+
+	}
 }
