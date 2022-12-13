@@ -25,12 +25,15 @@ public class DevelopmentBooksService {
 		int totalBooks = booksBought.stream().mapToInt(book -> book.getQuantity()).sum();
 		double actualCost = totalBooks * SINGLE_BOOK_PRICE;
 		double discount = 0;
-		if(totalBooks == 2)
+		
+		int typesOfBook = (int) booksBought.stream().filter(book -> book.getQuantity() > 0).count();
+		
+		if(totalBooks == 2 && typesOfBook == 2)
 		{
 			discount = 5;
 		}
 		
-		else if(totalBooks == 3)
+		else if(totalBooks == 3 && typesOfBook == 3)
 		{
 			discount = 10;
 		}

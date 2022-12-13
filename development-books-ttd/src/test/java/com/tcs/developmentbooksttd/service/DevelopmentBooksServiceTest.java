@@ -57,4 +57,13 @@ public class DevelopmentBooksServiceTest {
 		assertEquals(135.0, result, 0.0);
 
 	}
+	
+	@Test
+	public void buyThreeSameBookWithoutDiscount() {
+		List<BooksInput> books = new ArrayList<BooksInput>();
+		books.add(new BooksInput(1, 3));
+		double result = service.calculateBooksCostWithDiscount(books);
+		assertEquals(150.0, result, 0.0);
+
+	}
 }
