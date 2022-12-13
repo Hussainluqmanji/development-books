@@ -22,11 +22,15 @@ public class DevelopmentBooksService {
 				bookEnum.getAuthor(), bookEnum.getYear(), bookEnum.getPrice())).collect(Collectors.toList());
 	}
 
-	public PriceSummary calculateBooksCostWithDiscount(List<BooksInput> booksBought) {
-		
+	public PriceSummary calculateBooksCostWithDiscount(List<BooksInput> booksBought) {		
 		if (booksBought.size() == 1)
 			return createPriceSummaryForOnlyOneBookType(booksBought.get(0));
-		
+		else
+			return groupBooksForDiscount(booksBought);
+	}
+	
+	public PriceSummary groupBooksForDiscount(List<BooksInput> booksBought)
+	{
 		List<Integer> bookGroups = new ArrayList<Integer>();
 		int totalBooks = booksBought.stream().mapToInt(book -> book.getQuantity()).sum();
 		int noOfGroups = 1 + (totalBooks / booksBought.size());
