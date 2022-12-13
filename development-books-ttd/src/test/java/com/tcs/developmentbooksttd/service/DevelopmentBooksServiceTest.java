@@ -6,16 +6,15 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import com.tcs.developmentbooksttd.enums.BooksEnum;
+import com.tcs.developmentbooksttd.model.BookModel;
 
 public class DevelopmentBooksServiceTest {
 
 	@Test
-	public void getAllBooks()
-	{
+	public void getAllBooks() {
 		DevelopmentBooksService service = new DevelopmentBooksService();
-		List<BooksEnum> books = service.getAllBooks();
-		System.out.println(books);
+		List<BookModel> books = service.getAllBooks();
 		assertEquals(5, books.size());
+
 	}
 }
