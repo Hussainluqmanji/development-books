@@ -25,9 +25,19 @@ public class DevelopmentBooksServiceTest {
 		DevelopmentBooksService service = new DevelopmentBooksService();
 		List<BooksInput> books = new ArrayList<BooksInput>();
 		books.add(new BooksInput(1, 1));
-		books.add(new BooksInput(2, 2));
-		double result = service.calculateBooksCost(books);
-		assertEquals(150.0, result, 0.0);
+		double result = service.calculateBooksCostWithDiscount(books);
+		assertEquals(50.0, result, 0.0);
+
+	}
+	
+	@Test
+	public void buyTwoDiffBookAndGetDiscount() {
+		DevelopmentBooksService service = new DevelopmentBooksService();
+		List<BooksInput> books = new ArrayList<BooksInput>();
+		books.add(new BooksInput(1, 1));
+		books.add(new BooksInput(2, 1));
+		double result = service.calculateBooksCostWithDiscount(books);
+		assertEquals(95.0, result, 0.0);
 
 	}
 }
