@@ -40,4 +40,16 @@ public class DevelopmentBooksServiceTest {
 		assertEquals(95.0, result, 0.0);
 
 	}
+	
+	@Test
+	public void buyThreeDiffBookAndGetDiscount() {
+		DevelopmentBooksService service = new DevelopmentBooksService();
+		List<BooksInput> books = new ArrayList<BooksInput>();
+		books.add(new BooksInput(1, 1));
+		books.add(new BooksInput(2, 1));
+		books.add(new BooksInput(3, 1));
+		double result = service.calculateBooksCostWithDiscount(books);
+		assertEquals(135.0, result, 0.0);
+
+	}
 }
