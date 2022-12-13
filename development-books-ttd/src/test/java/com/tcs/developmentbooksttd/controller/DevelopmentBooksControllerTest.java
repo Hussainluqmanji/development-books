@@ -2,6 +2,7 @@ package com.tcs.developmentbooksttd.controller;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -25,7 +26,10 @@ public class DevelopmentBooksControllerTest {
 	public void buyBookSuccess() {
 		DevelopmentBooksController controller = new DevelopmentBooksController();
 		controller.service = new DevelopmentBooksService();
-		double result = controller.buyBooks(new BooksInput(1, 1));
-		assertEquals(50.0, result, 0.0);
+		List<BooksInput> books = new ArrayList<BooksInput>();
+		books.add(new BooksInput(1, 1));
+		books.add(new BooksInput(2, 2));
+		double result = controller.buyBooks(books);
+		assertEquals(150.0, result, 0.0);
 	}
 }

@@ -2,6 +2,7 @@ package com.tcs.developmentbooksttd.service;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -18,12 +19,15 @@ public class DevelopmentBooksServiceTest {
 		assertEquals(5, books.size());
 
 	}
-	
+
 	@Test
 	public void buyBookSuccess() {
 		DevelopmentBooksService service = new DevelopmentBooksService();
-		double result = service.buyBooks(new BooksInput(1, 1));
-		assertEquals(50.0, result, 0.0);
+		List<BooksInput> books = new ArrayList<BooksInput>();
+		books.add(new BooksInput(1, 1));
+		books.add(new BooksInput(2, 2));
+		double result = service.calculateBooksCost(books);
+		assertEquals(150.0, result, 0.0);
 
 	}
 }
