@@ -25,8 +25,7 @@ public class DevelopmentBooksControllerTest {
 	public void buyBookSuccess() {
 		DevelopmentBooksController controller = new DevelopmentBooksController();
 		controller.service = new DevelopmentBooksService();
-		String result = controller.buyBooks(new BooksInput(1, 1));
-		assertEquals("Book bought..", result);
-
+		double result = controller.buyBooks(new BooksInput(1, 1));
+		assertEquals(50.0, result, 0.0);
 	}
 }
