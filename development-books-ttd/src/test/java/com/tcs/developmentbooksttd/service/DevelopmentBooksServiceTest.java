@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import com.tcs.developmentbooksttd.model.BookModel;
 import com.tcs.developmentbooksttd.model.BooksInput;
+import com.tcs.developmentbooksttd.model.PriceSummary;
 
 public class DevelopmentBooksServiceTest {
 
@@ -32,8 +33,8 @@ public class DevelopmentBooksServiceTest {
 	public void buyBookSuccess() {
 		List<BooksInput> books = new ArrayList<BooksInput>();
 		books.add(new BooksInput(1, 1));
-		double result = service.calculateBooksCostWithDiscount(books);
-		assertEquals(50.0, result, 0.0);
+		PriceSummary result = service.calculateBooksCostWithDiscount(books);
+		assertEquals(50.0, result.getFinalPrice(), 0.0);
 
 	}
 
@@ -42,8 +43,8 @@ public class DevelopmentBooksServiceTest {
 		List<BooksInput> books = new ArrayList<BooksInput>();
 		books.add(new BooksInput(1, 1));
 		books.add(new BooksInput(2, 1));
-		double result = service.calculateBooksCostWithDiscount(books);
-		assertEquals(95.0, result, 0.0);
+		PriceSummary result = service.calculateBooksCostWithDiscount(books);
+		assertEquals(95.0, result.getFinalPrice(), 0.0);
 
 	}
 
@@ -53,8 +54,8 @@ public class DevelopmentBooksServiceTest {
 		books.add(new BooksInput(1, 1));
 		books.add(new BooksInput(2, 1));
 		books.add(new BooksInput(3, 1));
-		double result = service.calculateBooksCostWithDiscount(books);
-		assertEquals(135.0, result, 0.0);
+		PriceSummary result = service.calculateBooksCostWithDiscount(books);
+		assertEquals(135.0, result.getFinalPrice(), 0.0);
 
 	}
 	
@@ -62,8 +63,8 @@ public class DevelopmentBooksServiceTest {
 	public void buyThreeSameBookWithoutDiscount() {
 		List<BooksInput> books = new ArrayList<BooksInput>();
 		books.add(new BooksInput(1, 3));
-		double result = service.calculateBooksCostWithDiscount(books);
-		assertEquals(150.0, result, 0.0);
+		PriceSummary result = service.calculateBooksCostWithDiscount(books);
+		assertEquals(150.0, result.getFinalPrice(), 0.0);
 
 	}
 	
@@ -74,8 +75,8 @@ public class DevelopmentBooksServiceTest {
 		books.add(new BooksInput(2, 1));
 		books.add(new BooksInput(3, 1));
 		books.add(new BooksInput(4, 1));
-		double result = service.calculateBooksCostWithDiscount(books);
-		assertEquals(160.0, result, 0.0);
+		PriceSummary result = service.calculateBooksCostWithDiscount(books);
+		assertEquals(160.0, result.getFinalPrice(), 0.0);
 
 	}
 	
@@ -87,8 +88,8 @@ public class DevelopmentBooksServiceTest {
 		books.add(new BooksInput(3, 1));
 		books.add(new BooksInput(4, 1));
 		books.add(new BooksInput(5, 1));
-		double result = service.calculateBooksCostWithDiscount(books);
-		assertEquals(187.5, result, 0.0);
+		PriceSummary result = service.calculateBooksCostWithDiscount(books);
+		assertEquals(187.5, result.getFinalPrice(), 0.0);
 
 	}
 	
@@ -100,8 +101,8 @@ public class DevelopmentBooksServiceTest {
 		books.add(new BooksInput(3, 2));
 		books.add(new BooksInput(4, 2));
 		books.add(new BooksInput(5, 2));
-		double result = service.calculateBooksCostWithDiscount(books);
-		assertEquals(375.0, result, 0.0);
+		PriceSummary result = service.calculateBooksCostWithDiscount(books);
+		assertEquals(375.0, result.getFinalPrice(), 0.0);
 
 	}
 	
@@ -113,8 +114,8 @@ public class DevelopmentBooksServiceTest {
 		books.add(new BooksInput(3, 2));
 		books.add(new BooksInput(4, 2));
 		books.add(new BooksInput(5, 12));
-		double result = service.calculateBooksCostWithDiscount(books);
-		assertEquals(875.0, result, 0.0);
+		PriceSummary result = service.calculateBooksCostWithDiscount(books);
+		assertEquals(875.0, result.getFinalPrice(), 0.0);
 
 	}
 }

@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import com.tcs.developmentbooksttd.model.BookModel;
 import com.tcs.developmentbooksttd.model.BooksInput;
+import com.tcs.developmentbooksttd.model.PriceSummary;
 import com.tcs.developmentbooksttd.service.DevelopmentBooksService;
 
 public class DevelopmentBooksControllerTest {
@@ -27,9 +28,8 @@ public class DevelopmentBooksControllerTest {
 		DevelopmentBooksController controller = new DevelopmentBooksController();
 		controller.service = new DevelopmentBooksService();
 		List<BooksInput> books = new ArrayList<BooksInput>();
-		books.add(new BooksInput(1, 1));
-		books.add(new BooksInput(2, 2));
-		double result = controller.buyBooks(books);
-		assertEquals(150.0, result, 0.0);
+		books.add(new BooksInput(1, 3));
+		PriceSummary result = controller.buyBooks(books);
+		assertEquals(150.0, result.getFinalPrice(), 0.0);
 	}
 }

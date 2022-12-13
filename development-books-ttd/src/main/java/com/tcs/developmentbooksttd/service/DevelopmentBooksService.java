@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.tcs.developmentbooksttd.enums.BooksEnum;
 import com.tcs.developmentbooksttd.model.BookModel;
 import com.tcs.developmentbooksttd.model.BooksInput;
+import com.tcs.developmentbooksttd.model.PriceSummary;
 
 @Service
 public class DevelopmentBooksService {
@@ -21,12 +22,11 @@ public class DevelopmentBooksService {
 				bookEnum.getAuthor(), bookEnum.getYear(), bookEnum.getPrice())).collect(Collectors.toList());
 	}
 
-	public double calculateBooksCostWithDiscount(List<BooksInput> booksBought) {
+	public PriceSummary calculateBooksCostWithDiscount(List<BooksInput> booksBought) {
 		
 		List<Integer> bookGroups = new ArrayList<Integer>();
 		int totalBooks = booksBought.stream().mapToInt(book -> book.getQuantity()).sum();
 		int noOfGroups = 1 + (totalBooks / booksBought.size());
-        double finalPrice = 0;
         double priceOfSimilarBooksLeft = 0;
         
 		for (int i = 0; i < noOfGroups; i++) {
@@ -40,9 +40,14 @@ public class DevelopmentBooksService {
 			}
 			} 
 	
+		PriceSummary priceSummary = new PriceSummary();
+		priceSummary.setActualPrice(50 * totalBooks);
+		priceSummary.setFinalPrice(priceOfSimilarBooksLeft
+				+ bookGroups.stream().mapToDouble(group -> calculatePriceForBooksWithDiscount(group)).sum());
+		priceSummary.setTotalBooks(totalBooks);
+		priceSummary.setTotalDiscount(priceSummary.getActualPrice() - priceSummary.getFinalPrice());
 
-	    finalPrice = priceOfSimilarBooksLeft + bookGroups.stream().mapToDouble(group -> calculatePriceForBooksWithDiscount(group)).sum();
-		return finalPrice;
+		return priceSummary;
 	}
 	
 	public void reduceQuantityOfAlreadyBookIntoGroups(List<BooksInput> books) {
@@ -53,6 +58,18 @@ public class DevelopmentBooksService {
 	
 	public double calculatePriceForBooksWithoutDiscount(List<BooksInput> books) {
 		return books.stream().filter(book -> book.getQuantity() > 0).mapToDouble(book -> book.getQuantity() * SINGLE_BOOK_PRICE).sum();
+	}
+	
+	public PriceSummary createPriceSummaryForMultipleBookGroups(List<Integer> bookGroups, int totalBooks,
+			double priceOfSimilarBooksLeft) {
+		PriceSummary priceSummary = new PriceSummary();
+		priceSummary.setActualPrice(50 * totalBooks);
+		priceSummary.setFinalPrice(priceOfSimilarBooksLeft
+				+ bookGroups.stream().mapToDouble(group -> calculatePriceForBooksWithDiscount(group)).sum());
+		priceSummary.setTotalBooks(totalBooks);
+		priceSummary.setTotalDiscount(priceSummary.getActualPrice() - priceSummary.getFinalPrice());
+
+		return priceSummary;
 	}
 	
 	public double calculatePriceForBooksWithDiscount(int differentBooks) {
