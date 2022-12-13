@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.tcs.developmentbooksttd.enums.BooksEnum;
 import com.tcs.developmentbooksttd.model.BookModel;
+import com.tcs.developmentbooksttd.model.BooksInput;
 
 @Service
 public class DevelopmentBooksService {
@@ -15,5 +16,9 @@ public class DevelopmentBooksService {
 	public List<BookModel> getAllBooks() {
 		return Arrays.stream(BooksEnum.values()).map(bookEnum -> new BookModel(bookEnum.getId(), bookEnum.getTitle(),
 				bookEnum.getAuthor(), bookEnum.getYear(), bookEnum.getPrice())).collect(Collectors.toList());
+	}
+
+	public String buyBooks(BooksInput booksBought) {
+		return "Book bought..";
 	}
 }
